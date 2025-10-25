@@ -6,11 +6,12 @@ import { test, expect } from '@playwright/test'
  * Tests:
  * 1. App loads and renders with correct title
  * 2. Pastel horror theme applied (horror-butter background)
- * 3. Basic UI elements are visible and interactive
+ * 3. Basic UI components (buttons, inputs, cards) are visible
+ * 4. Page has proper structure and layout
  */
 
 test.describe('Smoke Tests', () => {
-  test('app loads and renders title', async ({ page }) => {
+  test('app loads and renders component showcase', async ({ page }) => {
     await page.goto('/')
 
     // Check page title
@@ -19,65 +20,75 @@ test.describe('Smoke Tests', () => {
     // Check main heading renders
     const heading = page.locator('h1')
     await expect(heading).toBeVisible()
-    await expect(heading).toContainText('Pastel Horror Theme Test')
+    await expect(heading).toContainText('shadcn/ui Component Showcase')
+
+    // Check subtitle
+    await expect(page.getByText('Pastel Horror Theme Integration')).toBeVisible()
   })
 
   test('pastel horror theme applied - horror-butter background', async ({ page }) => {
     await page.goto('/')
 
-    // Check body has horror-butter background
-    const body = page.locator('body')
-    const bgColor = await body.evaluate(el =>
+    // Check main container has horror-butter background
+    const mainContainer = page.locator('div.bg-horror-butter').first()
+    await expect(mainContainer).toBeVisible()
+
+    // Verify the background color is applied (not default white)
+    const bgColor = await mainContainer.evaluate(el =>
       window.getComputedStyle(el).backgroundColor
     )
-
-    // horror-butter should NOT be default white (rgb(255, 255, 255))
     expect(bgColor).not.toBe('rgb(255, 255, 255)')
     expect(bgColor).toBeTruthy()
   })
 
-  test('all horror theme color swatches render', async ({ page }) => {
+  test('button components render with pastel horror styling', async ({ page }) => {
     await page.goto('/')
 
-    // Check that all 11 color swatches are visible
-    const swatches = page.locator('div.grid > div')
-    await expect(swatches).toHaveCount(11)
+    // Check for "Buttons" section card title
+    await expect(page.getByText('Buttons', { exact: true })).toBeVisible()
 
-    // Verify specific color swatches are present
-    await expect(page.getByText('horror-mint')).toBeVisible()
-    await expect(page.getByText('horror-peach')).toBeVisible()
-    await expect(page.getByText('horror-lavender')).toBeVisible()
-    await expect(page.getByText('horror-coral')).toBeVisible()
-    await expect(page.getByText('horror-rust')).toBeVisible()
-    await expect(page.getByText('horror-sage')).toBeVisible()
-    await expect(page.getByText('horror-slate')).toBeVisible()
-    await expect(page.getByText('horror-charcoal')).toBeVisible()
-    await expect(page.getByText('horror-glow')).toBeVisible()
-    await expect(page.getByText('horror-warning')).toBeVisible()
-    await expect(page.getByText('horror-shadow')).toBeVisible()
+    // Verify specific buttons are present
+    await expect(page.getByRole('button', { name: 'Generate Vibe' })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Stop Playback' })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Reset Parameters' })).toBeVisible()
   })
 
-  test('font tests render correctly', async ({ page }) => {
+  test('input components render with placeholder text', async ({ page }) => {
     await page.goto('/')
 
-    // Check for font test section
-    const fontSection = page.locator('div.mt-8.p-4')
-    await expect(fontSection).toBeVisible()
+    // Check for "Input" section card title
+    await expect(page.getByText('Input', { exact: true })).toBeVisible()
 
-    // Verify both font family tests are present
-    await expect(page.getByText(/Font Test: Inter/)).toBeVisible()
-    await expect(page.getByText(/Font Test: JetBrains Mono/)).toBeVisible()
+    // Check for vibe input field
+    const vibeInput = page.getByPlaceholder(/Enter your vibe description/)
+    await expect(vibeInput).toBeVisible()
+
+    // Verify input is interactive
+    await vibeInput.fill('test vibe')
+    await expect(vibeInput).toHaveValue('test vibe')
+  })
+
+  test('card components display correctly', async ({ page }) => {
+    await page.goto('/')
+
+    // Check for specific card title text (using exact match for the first occurrence)
+    const djEffectsCard = page.locator('[data-slot="card-title"]', { hasText: 'DJ Effects' }).first()
+    await expect(djEffectsCard).toBeVisible()
+
+    // Check for other card titles
+    await expect(page.getByText('Tempo Control')).toBeVisible()
+    await expect(page.getByText('Volume Mix')).toBeVisible()
   })
 
   test('page has proper structure and layout', async ({ page }) => {
     await page.goto('/')
 
     // Check main container has correct classes
-    const mainDiv = page.locator('div.min-h-screen')
+    const mainDiv = page.locator('div.min-h-screen.bg-horror-butter')
     await expect(mainDiv).toBeVisible()
 
-    // Check grid layout is present
-    const grid = page.locator('div.grid.grid-cols-3')
-    await expect(grid).toBeVisible()
+    // Check max-width container exists
+    const container = page.locator('div.max-w-6xl')
+    await expect(container).toBeVisible()
   })
 })

@@ -18,7 +18,7 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:8420',
     trace: 'on-first-retry',
-    permissions: ['audio-capture'], // Required for Tone.js audio tests
+    // Note: audio permissions will be needed for future Tone.js audio tests
   },
 
   projects: [
