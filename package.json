@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --port 8420",
     "build": "tsc && vite build",
+    "start": "serve dist -s -p 8080",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -26,6 +27,7 @@
     "lucide-react": "^0.548.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "serve": "^14.2.5",
     "tailwind-merge": "^3.3.1",
     "vaul": "^1.1.2"
   },
