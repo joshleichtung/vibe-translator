@@ -1,7 +1,7 @@
-import { ComponentShowcase } from '@/components/ComponentShowcase'
+import { CanaryPage } from '@/components/CanaryPage'
 
 function App() {
-  return <ComponentShowcase />
+  return <CanaryPage />
 }
 
 export default App
