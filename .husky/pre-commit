@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run TypeScript validation
+npm run typecheck
+
+# Run ESLint validation
+npm run lint
