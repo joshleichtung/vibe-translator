@@ -8,7 +8,7 @@ import { VibeInputForm } from '@/components/VibeInputForm';
 import { ChordProgressionDisplay } from '@/components/ChordProgressionDisplay';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { ErrorDisplay } from '@/components/ErrorDisplay';
-import { generateChords } from '@/lib/musicgen';
+import { generateChords } from '@/lib/musicgenServerless';
 import { parseMusicGenResponse } from '@/lib/parser';
 import type { ChordProgression } from '@/types/music';
 import type { ChordGenerationError } from '@/types/musicgen';

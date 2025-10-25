@@ -1,6 +1,15 @@
 name: vibe-translator
 region: nyc
 
+functions:
+  - name: generate
+    source_dir: api
+    environment_slug: node-js
+    envs:
+      - key: REPLICATE_API_TOKEN
+        scope: RUN_TIME
+        type: SECRET
+
 static_sites:
   - name: vibe-translator-web
     github:

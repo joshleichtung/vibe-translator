@@ -1,0 +1,8 @@
+{
+  "name": "vibe-translator-api",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "replicate": "^1.3.1"
+  }
+}
