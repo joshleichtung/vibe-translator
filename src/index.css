@@ -158,3 +158,20 @@ h1, h2, h3, h4, h5, h6 {
     @apply bg-background text-foreground;
   }
 }
+
+/* Chord Progression Display - Responsive Styles */
+@media (max-width: 768px) {
+  .chord-progression-display .chord-sequence {
+    @apply text-base;
+  }
+
+  .chord-progression-display .tempo-display {
+    @apply text-xs;
+  }
+}
+
+@media (min-width: 769px) {
+  .chord-progression-display .chord-sequence {
+    @apply text-xl;
+  }
+}
