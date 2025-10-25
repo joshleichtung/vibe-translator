@@ -2,6 +2,8 @@
 
 AI-powered music generation from emotional vibes for the Dumb Things AI Hackathon.
 
+**🌐 Live Demo**: https://vibe-translator-wjdf5.ondigitalocean.app/
+
 ## Description
 
 The Vibe Translator Machine takes emotional or situational descriptions and translates them into playable music using Replicate's MusicGen-Chord AI model. It combines AI-generated chord progressions with Tone.js synthesis for an interactive jamming experience.
