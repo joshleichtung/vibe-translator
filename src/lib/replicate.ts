@@ -9,17 +9,3 @@ if (!apiToken) {
 export const replicateClient = new Replicate({
   auth: apiToken,
 });
-
-// Type definitions for API responses
-export interface MusicGenChordResponse {
-  output: string | string[];
-  status: 'succeeded' | 'failed' | 'processing';
-}
-
-export interface MusicGenChordInput {
-  prompt: string;
-  duration?: number;
-  temperature?: number;
-  top_k?: number;
-  top_p?: number;
-}
